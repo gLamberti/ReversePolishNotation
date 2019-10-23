@@ -1,0 +1,218 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+ 
+ 
+ 
+
+typedef struct Element Element;
+struct Element
+{
+    char valeur;
+    Element *suivant;
+};
+
+typedef struct Pile Pile;
+struct Pile
+{
+    Element *premier;
+}; 
+
+
+
+Pile *initialiser()
+{
+    Pile *pile = malloc(sizeof(*pile));
+    pile->premier = NULL;
+}
+
+
+void empiler(Pile *pile, char nvValeur)
+{
+    Element *nouveau = malloc(sizeof(*nouveau));
+    if (pile == NULL || nouveau == NULL)
+    {
+
+        exit(EXIT_FAILURE);
+    }
+
+    nouveau->valeur = nvValeur;
+    nouveau->suivant = pile->premier;
+    pile->premier = nouveau;
+}
+
+char depiler(Pile *pile)
+{
+    if (pile == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    char valeurDepile = 0;
+    Element *elementDepile = pile->premier;
+
+    if (pile != NULL && pile->premier != NULL)
+    {
+        valeurDepile = elementDepile->valeur;
+        pile->premier = elementDepile->suivant;
+        free(elementDepile);
+    }
+
+    return valeurDepile;
+}
+
+void afficherPile(Pile *pile)
+{
+    if (pile == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+    Element *actuel = pile->premier;
+
+    while (actuel != NULL)
+    {
+        printf("%d\n", actuel->valeur);
+        actuel = actuel->suivant;
+    }
+
+    printf("\n");
+}
+
+
+
+ 
+ 
+
+
+
+
+
+
+/* int main()
+{
+    int N;
+    
+    pile *MaPile = NULL;
+    pile *index = NULL;
+    int err = 0;
+    
+    
+    scanf("%d", &N);
+    printf("%d = N \n", N);
+    char instruction[11];
+    //char tab[N +1];
+    for (int i = 0; i < N; i++) {
+        
+        
+        
+        scanf("%s", instruction);
+        printf("%s\n", instruction);
+        printf("%c = unite\n",*instruction);
+        char instru = instruction;
+        printf("instru = %s\n",instruction);
+        
+    }
+    }
+*/
+
+int main()
+{
+    Pile *maPile = initialiser(); 
+    
+/*    
+
+    empiler(maPile, 4);
+    empiler(maPile, 8);
+    empiler(maPile, 15);
+    empiler(maPile, 16);
+    empiler(maPile, 23);
+    empiler(maPile, 42);
+
+    
+*/
+
+    int N;
+
+    scanf("%d", &N);
+    printf("%d = N \n", N);
+    
+    
+    for (int i = 0; i < N; i++) {
+        
+        char instruction[11];
+        scanf("%s", instruction);
+        printf("instruction donnée = %s\n", instruction);
+        
+        char instru;
+        instru = *instruction;
+        
+        
+        
+        printf("instru code acsii = %d\n",instru);
+        printf("instru = %c\n",instru);
+       // printf("instruEntiere = %s\n",instru);
+        
+        
+        empiler(maPile,instru);
+   
+         printf("\nEtat de la pile :\n");
+         afficherPile(maPile);
+         
+         
+         if(instru == 'A'){
+             
+             
+             char valeurADD = depiler(maPile);
+             char valeur1 = depiler(maPile);
+             char valeur2 = depiler(maPile);
+             
+             
+             char val = (char) valeur1;
+             printf("val = %c\n",val);
+             char val2 = (char) valeur2;
+             printf("val2 = %c\n",val2);
+             
+             
+             int result = (char) val + (char) val2;
+             printf("numVal = %c + %c = %d\n",valeur1,valeur2,result);
+             
+             
+             
+             printf("result = %c\n",result);
+             
+             
+         }
+         
+         printf("\nEtat de la pile :\n");
+         afficherPile(maPile);
+         
+         
+
+    /*     printf("Je depile %d\n", depiler(maPile));
+         printf("Je depile %d\n", depiler(maPile));
+
+         printf("\nEtat de la pile :\n");
+         afficherPile(maPile);
+   */
+    }
+
+    return 0;
+
+
+        
+        //tab[i] = Push(&MaPile, instruction);
+        //printf("%c\n", MaPile->valeur);
+         
+        /*else{
+            printf("ca passe pas\n");
+        }*/
+    
+    printf("answer\n");
+
+    return 0;
+}
